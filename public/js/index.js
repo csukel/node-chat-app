@@ -10,10 +10,10 @@ socket.on('connect', () => {
     //     createdAt: new Date()
     // })
 
-    socket.emit('createMessage',{
-        from: 'Loucas',
-        text: 'Message to another user'
-    });
+    // socket.emit('createMessage',{
+    //     from: 'Loucas',
+    //     text: 'Message to another user'
+    // });
 })
 
 socket.on('disconnect', () => {

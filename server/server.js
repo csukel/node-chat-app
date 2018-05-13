@@ -25,7 +25,16 @@ io.on('connection',(socket)=>{
     //     createdAt: new Date()
     // });
 
-
+    //socket.emit from Admin text Welcome to chat app
+    socket.emit('newMessage',{
+        from: 'Admin',
+        text: 'Welcome to chat app'
+    });
+    //socket.broadcast.emit from Admin text New user joined
+    socket.broadcast.emit('newMessage',{
+        from: 'Admin',
+        text: 'New user joined'
+    })
 
     // socket.on('createEmail',(newEmail)=>{
     //     console.log('createEmail',newEmail);
@@ -33,11 +42,17 @@ io.on('connection',(socket)=>{
     socket.on('createMessage',(message)=>{
         //console.log(message);
         //broadcast message
-        io.emit('newMessage',{
+        // io.emit('newMessage',{
+        //     from: message.from,
+        //     text: message.text,
+        //     cratedAt: new Date()
+        // });
+        //send the message to everybody else apart from this sockete/user
+        socket.broadcast.emit('newMessage',{
             from: message.from,
             text: message.text,
             cratedAt: new Date()
-        });
+        })
     })
 
     socket.on('disconnect',()=>{
