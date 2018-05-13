@@ -24,13 +24,16 @@ io.on('connection',(socket)=>{
     //socket.broadcast.emit from Admin text New user joined
     socket.broadcast.emit('newMessage',generateMessage('Admin','New user joined'));
 
-    socket.on('createMessage',(message)=>{
+    socket.on('createMessage',(message,callback)=>{
+        io.emit('newMessage',generateMessage(message.from,message.text));
+        //server acknowledges that message was received
+        callback('This is from the server');
         //send the message to everybody else apart from this sockete/user
-        socket.broadcast.emit('newMessage',{
-            from: message.from,
-            text: message.text,
-            cratedAt: new Date()
-        })
+        // socket.broadcast.emit('newMessage',{
+        //     from: message.from,
+        //     text: message.text,
+        //     cratedAt: new Date()
+        // })
     })
 
     socket.on('disconnect',()=>{
