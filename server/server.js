@@ -27,7 +27,7 @@ io.on('connection',(socket)=>{
     socket.on('createMessage',(message,callback)=>{
         io.emit('newMessage',generateMessage(message.from,message.text));
         //server acknowledges that message was received
-        callback('This is from the server');
+        callback();
         //send the message to everybody else apart from this sockete/user
         // socket.broadcast.emit('newMessage',{
         //     from: message.from,
